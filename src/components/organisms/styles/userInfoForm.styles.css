@@ -1,0 +1,25 @@
+.user-info-form {
+  border-radius: 15px;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.user-info-form .first-row {
+  margin: 20px 0px 50px 0px;
+  width: 350px;
+}
+.user-info-form .row {
+  margin: 50px 0px 50px 0px;
+  width: 350px;
+}
+
+.user-info-form .heading {
+  display: flex;
+  justify-content: center;
+}
+
+
+.user-info-form .next-section {
+  display: flex;
+  justify-content: center;
+}
