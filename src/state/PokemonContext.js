@@ -4,7 +4,7 @@ const PokemonContext = createContext();
 
 export function PokemonProvider({ children }) {
   const [pokemon, setPokemon] = useState({
-    abilities: {},
+    abilities: {results:[]},
     types: {},
     colors: {},
     pokemons: {},

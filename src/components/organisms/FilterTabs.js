@@ -1,12 +1,17 @@
-import { useState, useContext } from "react";
-import PropTypes from "prop-types";
-import { useTheme } from "@mui/material/styles";
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { Button, IconButton } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import { useTheme } from "@mui/material/styles";
+import Tab from "@mui/material/Tab";
+import Tabs from "@mui/material/Tabs";
+import Typography from "@mui/material/Typography";
+import PropTypes from "prop-types";
+import { useContext, useState } from "react";
 import PokemonContext from "../../state/PokemonContext";
+import "./styles/filterTabs.styles.css";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,33 +60,54 @@ const FilterTabs = () => {
   // };
 
   return (
-    <Box
-      sx={{ bgcolor: "background.paper", width: "100%", marginRight: "10px" }}
-    >
-      <AppBar position="static">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="secondary"
-          textColor="inherit"
-          variant="fullWidth"
-          aria-label="full width tabs example"
-        >
-          <Tab label="Abilities" {...a11yProps(0)} />
-          <Tab label="Type" {...a11yProps(1)} />
-          <Tab label="Color" {...a11yProps(2)} />
-        </Tabs>
-      </AppBar>
-      <TabPanel value={value} index={0} dir={theme.direction}>
-        Abilities
-      </TabPanel>
-      <TabPanel value={value} index={1} dir={theme.direction}>
-        Type
-      </TabPanel>
-      <TabPanel value={value} index={2} dir={theme.direction}>
-        Color
-      </TabPanel>
-    </Box>
+    <div className="filter-tabs">
+      <Box
+        sx={{ bgcolor: "background.paper", width: "100%", marginRight: "10px" }}
+      >
+        <AppBar position="static">
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="secondary"
+            textColor="inherit"
+            variant="fullWidth"
+            aria-label="full width tabs example"
+          >
+            <Tab label="Abilities" {...a11yProps(0)} />
+            <Tab label="Type" {...a11yProps(1)} />
+            <Tab label="Color" {...a11yProps(2)} />
+          </Tabs>
+        </AppBar>
+        <TabPanel value={value} index={0} dir={theme.direction}>
+          <Grid container spacing={2}>
+            {pokemon.abilities.results.map((ability) => (
+              <Grid item xs={4} md={4}>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <Button className="ability-btn" variant="outlined">
+                    {ability.name}
+                  </Button>
+                </div>
+              </Grid>
+            ))}
+          </Grid>
+          <div className="navigation-container">
+            <IconButton size="large" >
+              <NavigateBeforeIcon className='nav-icon'/>
+            </IconButton>
+
+            <IconButton size="large">
+              <NavigateNextIcon className='nav-icon'/>
+            </IconButton>
+          </div>
+        </TabPanel>
+        <TabPanel value={value} index={1} dir={theme.direction}>
+          Type
+        </TabPanel>
+        <TabPanel value={value} index={2} dir={theme.direction}>
+          Color
+        </TabPanel>
+      </Box>
+    </div>
   );
 };
 
