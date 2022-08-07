@@ -1,6 +1,10 @@
 import { Button, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  getUserFromLocalStorage,
+  setUserToLocalStorage,
+} from "../../helpers/localStorage";
 import "./styles/userInfoForm.styles.css";
 
 const UserInfoForm = () => {
@@ -24,6 +28,15 @@ const UserInfoForm = () => {
       return true;
     return false;
   };
+
+  useEffect(() => {
+    const userFromLocalStorage = getUserFromLocalStorage();
+    if (userFromLocalStorage) setUser(userFromLocalStorage);
+  }, []);
+
+  useEffect(() => {
+    setUserToLocalStorage(user);
+  }, [user]);
 
   return (
     <div className="user-info-form">
@@ -64,6 +77,7 @@ const UserInfoForm = () => {
           label="Last Name"
           fullWidth
           variant="standard"
+          value={user.lastName}
           error={error.lastName}
           helperText={error.lastName ? "Please enter a valid last name." : " "}
           onChange={(e) => {
