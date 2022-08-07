@@ -1,6 +1,8 @@
 import { Button, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import {
   getUserFromLocalStorage,
   setUserToLocalStorage,
@@ -8,6 +10,8 @@ import {
 import "./styles/userInfoForm.styles.css";
 
 const UserInfoForm = () => {
+  let navigate = useNavigate();
+
   const [error, setError] = useState({
     firstName: false,
     lastName: false,
@@ -22,13 +26,6 @@ const UserInfoForm = () => {
     address: "",
   });
 
-  const isDisabled = () => {
-    if (Object.values(user).some((info) => info === "")) return true;
-    if (Object.values(error).some((errorState) => errorState === true))
-      return true;
-    return false;
-  };
-
   useEffect(() => {
     const userFromLocalStorage = getUserFromLocalStorage();
     if (userFromLocalStorage) setUser(userFromLocalStorage);
@@ -37,6 +34,13 @@ const UserInfoForm = () => {
   useEffect(() => {
     setUserToLocalStorage(user);
   }, [user]);
+
+  const isDisabled = () => {
+    if (Object.values(user).some((info) => info === "")) return true;
+    if (Object.values(error).some((errorState) => errorState === true))
+      return true;
+    return false;
+  };
 
   return (
     <div className="user-info-form">
@@ -156,6 +160,9 @@ const UserInfoForm = () => {
           disabled={isDisabled()}
           variant="contained"
           style={{ width: 150 }}
+          onClick={() => {
+            navigate("/pokemon");
+          }}
         >
           Next
         </Button>
