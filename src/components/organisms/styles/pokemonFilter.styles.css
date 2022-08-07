@@ -1,3 +1,25 @@
 .pokemon-filter {
-  background-color: skyblue;
+	padding: 0px 10px;
+}
+
+.pokemon-filter .search-area {
+  width: 100%;
+  display: flex;
+}
+
+.pokemon-filter .search-container {
+  flex: 1;
+}
+.pokemon-filter .search-area .search-btn {
+  width: 100px;
+  margin: 0px 10px;
+}
+
+.pokemon-filter .filter-tabs-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* background-color: aqua; */
+  margin-top: 20px;
+  /* margin: 0px 10px; */
 }
