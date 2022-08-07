@@ -1,11 +1,12 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { useTheme } from '@mui/material/styles';
-import AppBar from '@mui/material/AppBar';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import { useState, useContext } from "react";
+import PropTypes from "prop-types";
+import { useTheme } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import PokemonContext from "../../state/PokemonContext";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -36,13 +37,14 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `full-width-tab-${index}`,
-    'aria-controls': `full-width-tabpanel-${index}`,
+    "aria-controls": `full-width-tabpanel-${index}`,
   };
 }
 
-export default function FilterTabs() {
+const FilterTabs = () => {
+  const { pokemon } = useContext(PokemonContext);
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -53,7 +55,9 @@ export default function FilterTabs() {
   // };
 
   return (
-    <Box sx={{ bgcolor: 'background.paper', width: '100%', marginRight: '10px' }}>
+    <Box
+      sx={{ bgcolor: "background.paper", width: "100%", marginRight: "10px" }}
+    >
       <AppBar position="static">
         <Tabs
           value={value}
@@ -68,15 +72,17 @@ export default function FilterTabs() {
           <Tab label="Color" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
-        <TabPanel value={value} index={0} dir={theme.direction}>
-          Abilities
-        </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
-          Type
-        </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-          Color
-        </TabPanel>
+      <TabPanel value={value} index={0} dir={theme.direction}>
+        Abilities
+      </TabPanel>
+      <TabPanel value={value} index={1} dir={theme.direction}>
+        Type
+      </TabPanel>
+      <TabPanel value={value} index={2} dir={theme.direction}>
+        Color
+      </TabPanel>
     </Box>
   );
-}
+};
+
+export default FilterTabs;
