@@ -7,17 +7,18 @@
 .user-info-form .first-row {
   margin: 20px 0px 50px 0px;
   width: 350px;
+  height: 50px;
 }
 .user-info-form .row {
   margin: 50px 0px 50px 0px;
   width: 350px;
+  height: 50px;
 }
 
 .user-info-form .heading {
   display: flex;
   justify-content: center;
 }
-
 
 .user-info-form .next-section {
   display: flex;
