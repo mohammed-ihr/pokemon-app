@@ -82,19 +82,6 @@ const FilterTabs = () => {
     actions.setTypes({ ...types, current: url });
   };
 
-  const handleFormPrevClick = async (url) => {
-    const res = await getDatafromURL(url);
-    const forms = await res.json();
-    actions.setForms({ ...forms, current: url });
-  };
-
-  const handleFormNextClick = async (url) => {
-    const current = pokemon.forms.current;
-    const res = await getDatafromURL(url);
-    const forms = await res.json();
-    actions.setForms({ ...forms, current: url, previous: current });
-  };
-
   const handleAbilityClick = async (url) => {
     const res = await getDatafromURL(url);
     const ability = await res.json();
@@ -118,7 +105,6 @@ const FilterTabs = () => {
           >
             <Tab label="Ability" {...a11yProps(0)} />
             <Tab label="Type" {...a11yProps(1)} />
-            <Tab label="Form" {...a11yProps(2)} />
           </Tabs>
         </AppBar>
         <TabPanel value={value} index={0} dir={theme.direction}>
@@ -184,39 +170,6 @@ const FilterTabs = () => {
               disabled={pokemon.types.next === null}
               onClick={() => {
                 handleTypeNextClick(pokemon.types.next);
-              }}
-              size="large"
-            >
-              <NavigateNextIcon disabled className="nav-icon" />
-            </IconButton>
-          </div>
-        </TabPanel>
-        <TabPanel value={value} index={2} dir={theme.direction}>
-          <Grid container spacing={2}>
-            {pokemon.forms.results.map((form) => (
-              <Grid item xs={4} md={4}>
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <Button className="display-btn" variant="outlined">
-                    {form.name}
-                  </Button>
-                </div>
-              </Grid>
-            ))}
-          </Grid>
-          <div className="navigation-container">
-            <IconButton
-              disabled={pokemon.forms.previous === null}
-              onClick={() => {
-                handleFormPrevClick(pokemon.forms.previous);
-              }}
-              size="large"
-            >
-              <NavigateBeforeIcon className="nav-icon" />
-            </IconButton>
-            <IconButton
-              disabled={pokemon.forms.next === null}
-              onClick={() => {
-                handleFormNextClick(pokemon.forms.next);
               }}
               size="large"
             >

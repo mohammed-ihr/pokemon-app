@@ -6,7 +6,6 @@ export function PokemonProvider({ children }) {
   const [pokemon, setPokemon] = useState({
     abilities: { results: [] },
     types: { results: [] },
-    forms: { results: [] },
     pokemons: [
       {
         name: "hitmonlee",
@@ -57,7 +56,6 @@ export function PokemonProvider({ children }) {
     selectedTab: 0,
     selectedAbility: "",
     selectedType: "",
-    selectedForm: "",
   });
 
   const actions = {
@@ -67,7 +65,6 @@ export function PokemonProvider({ children }) {
     setAbilities: (abilities) =>
       setPokemon((prevState) => ({ ...prevState, abilities })),
     setTypes: (types) => setPokemon((prevState) => ({ ...prevState, types })),
-    setForms: (forms) => setPokemon((prevState) => ({ ...prevState, forms })),
     setPokemons: (pokemons) =>
       setPokemon((prevState) => ({ ...prevState, pokemons })),
     setSelectedPokemon: (selectedPokemon) =>
@@ -84,8 +81,6 @@ export function PokemonProvider({ children }) {
       setFilterInput((prevState) => ({ ...prevState, selectedAbility })),
     setSelectedType: (selectedType) =>
       setFilterInput((prevState) => ({ ...prevState, selectedType })),
-    setSelectedForm: (selectedForm) =>
-      setFilterInput((prevState) => ({ ...prevState, selectedForm })),
 
     // ==============================================================================
   };
