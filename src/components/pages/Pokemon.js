@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import PokemonFilter from "../organisms/PokemonFilter";
 import AppBar from "../molecules/AppBar";
 import "./styles/pokemon.styles.css";
-import { getAbilities, getForms, getTypes } from "../../network/pokemon.api";
+import { getAbilities, getTypes } from "../../network/pokemon.api";
 import PokemonContext from "../../state/PokemonContext";
 import PokemonDisplay from "../organisms/PokemonDisplay";
 
