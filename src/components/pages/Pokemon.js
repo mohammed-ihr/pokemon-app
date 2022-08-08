@@ -5,6 +5,7 @@ import AppBar from "../molecules/AppBar";
 import "./styles/pokemon.styles.css";
 import { getAbilities, getColors, getTypes } from "../../network/pokemon.api";
 import PokemonContext from "../../state/PokemonContext";
+import PokemonDisplay from "../organisms/PokemonDisplay";
 
 const Pokemon = () => {
   const { actions } = useContext(PokemonContext);
@@ -46,7 +47,7 @@ const Pokemon = () => {
           <PokemonFilter />
         </Grid>
         <Grid item xs={12} md={6}>
-          display
+          <PokemonDisplay />
         </Grid>
       </Grid>
     </div>

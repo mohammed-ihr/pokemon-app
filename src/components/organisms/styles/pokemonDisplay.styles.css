@@ -1,0 +1,19 @@
+.pokemon-display .pokemon-container {
+  height: 500px;
+  width: 300px;
+  border: 1px solid black;
+}
+
+.pokemon-display .pokemon-container .heading {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+
+.pokemon-display .pokemon-container .picture {
+  display: flex;
+  justify-content: center;
+  height: 200px;
+  margin-top: 10px;
+}
