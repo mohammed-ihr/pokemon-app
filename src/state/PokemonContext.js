@@ -4,8 +4,8 @@ const PokemonContext = createContext();
 
 export function PokemonProvider({ children }) {
   const [pokemon, setPokemon] = useState({
-    abilities: { results: [] },
-    types: { results: [] },
+    abilities:  [],
+    types: [] ,
     pokemons: [
       {
         name: "hitmonlee",

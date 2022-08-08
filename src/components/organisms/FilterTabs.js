@@ -9,6 +9,7 @@ import { useContext, useState } from "react";
 import { getDatafromURL } from "../../network/pokemon.api";
 import PokemonContext from "../../state/PokemonContext";
 import PaginatedItems from "../molecules/PaginatedItems";
+import { sortArrayOfObjectsByProperty } from "../../common/commonFunctions";
 import "./styles/filterTabs.styles.css";
 
 function TabPanel(props) {
@@ -56,7 +57,8 @@ const FilterTabs = () => {
   const handleClickInsidePagination = async (url) => {
     const res = await getDatafromURL(url);
     const ability = await res.json();
-    const pokemons = ability.pokemon.map((data) => data.pokemon);
+    let pokemons = ability.pokemon.map((data) => data.pokemon);
+    pokemons = sortArrayOfObjectsByProperty(pokemons, "name");
     actions.setPokemons(pokemons);
   };
 
@@ -80,7 +82,7 @@ const FilterTabs = () => {
         </AppBar>
         <TabPanel value={value} index={0} dir={theme.direction}>
           <PaginatedItems
-            data={pokemon.abilities.results}
+            data={pokemon.abilities}
             currentPage={filterInput.currentAbilityPage}
             limit={12}
             setPage={(pageNo) => actions.setCurrentAbilityPage(pageNo)}
@@ -89,7 +91,7 @@ const FilterTabs = () => {
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <PaginatedItems
-            data={pokemon.types.results}
+            data={pokemon.types}
             currentPage={filterInput.currentTypePage}
             limit={12}
             setPage={(pageNo) => actions.setCurrentTypePage(pageNo)}

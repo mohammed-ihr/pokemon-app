@@ -6,22 +6,25 @@ import "./styles/pokemon.styles.css";
 import { getAbilities, getTypes } from "../../network/pokemon.api";
 import PokemonContext from "../../state/PokemonContext";
 import PokemonDisplay from "../organisms/PokemonDisplay";
+import { sortArrayOfObjectsByProperty } from "../../common/commonFunctions";
 
 const Pokemon = () => {
   const { actions } = useContext(PokemonContext);
 
   const populateAbbilities = async () => {
     const res = await getAbilities();
-    const abilities = await res.json();
-    actions.setAbilities({ ...abilities, current: res.url });
+    let abilities = await res.json();
+    abilities = sortArrayOfObjectsByProperty(abilities.results, "name");
+    console.log(abilities)
+    actions.setAbilities(abilities);
   };
 
   const populateTypes = async () => {
     const res = await getTypes();
-    const types = await res.json();
-    actions.setTypes({ ...types, current: res.url });
+    let types = await res.json();
+    types = sortArrayOfObjectsByProperty(types.results, "name");
+    actions.setTypes(types);
   };
-
 
   useEffect(() => {
     populateAbbilities();

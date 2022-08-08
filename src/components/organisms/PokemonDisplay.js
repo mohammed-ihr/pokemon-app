@@ -32,7 +32,7 @@ const PokemonDisplay = () => {
           disablePortal
           id="combo-box-demo"
           options={pokemon.pokemons}
-          getOptionLabel={(option) => option.name ?? option}
+          getOptionLabel={(option) => option.name.toUpperCase()}
           renderInput={(params) => (
             <TextField {...params} label="Select Pokemon" />
           )}
