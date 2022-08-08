@@ -46,7 +46,9 @@ const Pokemon = () => {
           <PokemonFilter />
         </Grid>
         <Grid item xs={12} md={6}>
-          <PokemonDisplay />
+          <div className="display-container">
+            <PokemonDisplay />
+          </div>
         </Grid>
       </Grid>
     </div>

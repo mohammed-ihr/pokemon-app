@@ -7,7 +7,33 @@ export function PokemonProvider({ children }) {
     abilities: { results: [] },
     types: { results: [] },
     forms: { results: [] },
-    pokemons: {},
+    pokemons: [
+      {
+        name: "hitmonlee",
+        url: "https://pokeapi.co/api/v2/pokemon/106/",
+      },
+      {
+        name: "zxxnlee",
+        url: "https://pokeapi.co/api/v2/pokemon/106/",
+      },
+      {
+        name: "lokonlee",
+        url: "https://pokeapi.co/api/v2/pokemon/106/",
+      },
+      {
+        name: "jjnnj",
+        url: "https://pokeapi.co/api/v2/pokemon/106/",
+      },
+      {
+        name: "jjjjj",
+        url: "https://pokeapi.co/api/v2/pokemon/106/",
+      },
+      {
+        name: "jjjs",
+        url: "https://pokeapi.co/api/v2/pokemon/106/",
+      },
+    ],
+
     selectedPokemon: {
       name: "Pikachu",
       sprites: {
@@ -17,6 +43,9 @@ export function PokemonProvider({ children }) {
           },
         },
       },
+      abilities: [],
+      types: [],
+      forms: [],
     },
   });
 
@@ -35,8 +64,7 @@ export function PokemonProvider({ children }) {
     setAbilities: (abilities) =>
       setPokemon((prevState) => ({ ...prevState, abilities })),
     setTypes: (types) => setPokemon((prevState) => ({ ...prevState, types })),
-    setForms: (forms) =>
-      setPokemon((prevState) => ({ ...prevState, forms })),
+    setForms: (forms) => setPokemon((prevState) => ({ ...prevState, forms })),
     setPokemons: (pokemons) =>
       setPokemon((prevState) => ({ ...prevState, pokemons })),
     setSelectedPokemon: (selectedPokemon) =>

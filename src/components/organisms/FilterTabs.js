@@ -95,6 +95,13 @@ const FilterTabs = () => {
     actions.setForms({ ...forms, current: url, previous: current });
   };
 
+  const handleAbilityClick = async (url) => {
+    const res = await getDatafromURL(url);
+    const ability = await res.json();
+    const pokemons = ability.pokemon.map((data) => data.pokemon);
+    actions.setPokemons(pokemons);
+  };
+
   return (
     <div className="filter-tabs">
       <Box
@@ -119,7 +126,11 @@ const FilterTabs = () => {
             {pokemon.abilities.results.map((ability) => (
               <Grid item xs={4} md={4}>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <Button className="display-btn" variant="outlined">
+                  <Button
+                    className="display-btn"
+                    variant="outlined"
+                    onClick={() => handleAbilityClick(ability.url)}
+                  >
                     {ability.name}
                   </Button>
                 </div>
