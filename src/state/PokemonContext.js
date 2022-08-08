@@ -41,6 +41,9 @@ export function PokemonProvider({ children }) {
           dream_world: {
             front_default: "",
           },
+          "official-artwork": {
+            front_default: "",
+          },
         },
       },
       abilities: [],

@@ -13,6 +13,17 @@ const PokemonDisplay = () => {
     const pokemon = await res.json();
     actions.setSelectedPokemon(pokemon);
   };
+
+  const getImage = () => {
+    const dream_world = selectedPokemon.sprites.other.dream_world.front_default;
+
+    const official =
+      selectedPokemon.sprites.other["official-artwork"].front_default;
+    if (dream_world) return dream_world;
+
+    return official;
+  };
+
   return (
     <div className="pokemon-display">
       <div className="autocomplete-dropdown">
@@ -23,10 +34,7 @@ const PokemonDisplay = () => {
           options={pokemon.pokemons}
           getOptionLabel={(option) => option.name ?? option}
           renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Select Pokemon"
-            />
+            <TextField {...params} label="Select Pokemon" />
           )}
           onChange={(event, value, reason) => {
             handleDropDownChange(value.url);
@@ -38,11 +46,7 @@ const PokemonDisplay = () => {
           {selectedPokemon.name.toUpperCase()}
         </Typography>
         <div className="picture">
-          <img
-            height="200px"
-            src={selectedPokemon.sprites.other.dream_world.front_default}
-            alt="new"
-          />
+          <img height="200px" src={getImage()} alt="new" />
         </div>
 
         <div className="basic-info">
