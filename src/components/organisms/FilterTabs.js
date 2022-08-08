@@ -10,6 +10,7 @@ import Tabs from "@mui/material/Tabs";
 import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import { useContext, useState } from "react";
+import { getDatafromURL } from "../../network/pokemon.api";
 import PokemonContext from "../../state/PokemonContext";
 import "./styles/filterTabs.styles.css";
 
@@ -47,7 +48,7 @@ function a11yProps(index) {
 }
 
 const FilterTabs = () => {
-  const { pokemon } = useContext(PokemonContext);
+  const { pokemon, actions } = useContext(PokemonContext);
   const theme = useTheme();
   const [value, setValue] = useState(0);
 
@@ -55,9 +56,44 @@ const FilterTabs = () => {
     setValue(newValue);
   };
 
-  // const handleChangeIndex = (index) => {
-  //   setValue(index);
-  // };
+  const handleAbilityNextClick = async (url) => {
+    const current = pokemon.abilities.current;
+    const res = await getDatafromURL(url);
+    const abilities = await res.json();
+    actions.setAbilities({ ...abilities, current: url, previous: current });
+  };
+
+  const handleAbilityPrevClick = async (url) => {
+    const res = await getDatafromURL(url);
+    const abilities = await res.json();
+    actions.setAbilities({ ...abilities, current: url });
+  };
+
+  const handleTypeNextClick = async (url) => {
+    const current = pokemon.types.current;
+    const res = await getDatafromURL(url);
+    const types = await res.json();
+    actions.setTypes({ ...types, current: url, previous: current });
+  };
+
+  const handleTypePrevClick = async (url) => {
+    const res = await getDatafromURL(url);
+    const types = await res.json();
+    actions.setTypes({ ...types, current: url });
+  };
+
+  const handleColorPrevClick = async (url) => {
+    const res = await getDatafromURL(url);
+    const types = await res.json();
+    actions.setColors({ ...types, current: url });
+  };
+
+  const handleColorNextClick = async (url) => {
+    const current = pokemon.types.current;
+    const res = await getDatafromURL(url);
+    const types = await res.json();
+    actions.setColors({ ...types, current: url, previous: current });
+  };
 
   return (
     <div className="filter-tabs">
@@ -83,7 +119,7 @@ const FilterTabs = () => {
             {pokemon.abilities.results.map((ability) => (
               <Grid item xs={4} md={4}>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                  <Button className="ability-btn" variant="outlined">
+                  <Button className="display-btn" variant="outlined">
                     {ability.name}
                   </Button>
                 </div>
@@ -91,20 +127,91 @@ const FilterTabs = () => {
             ))}
           </Grid>
           <div className="navigation-container">
-            <IconButton size="large" >
-              <NavigateBeforeIcon className='nav-icon'/>
+            <IconButton
+              disabled={pokemon.abilities.previous === null}
+              onClick={() => {
+                handleAbilityPrevClick(pokemon.abilities.previous);
+              }}
+              size="large"
+            >
+              <NavigateBeforeIcon className="nav-icon" />
             </IconButton>
-
-            <IconButton size="large">
-              <NavigateNextIcon className='nav-icon'/>
+            <IconButton
+              disabled={pokemon.abilities.next === null}
+              onClick={() => {
+                handleAbilityNextClick(pokemon.abilities.next);
+              }}
+              size="large"
+            >
+              <NavigateNextIcon disabled className="nav-icon" />
             </IconButton>
           </div>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          Type
+          <Grid container spacing={2}>
+            {pokemon.types.results.map((type) => (
+              <Grid item xs={4} md={4}>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <Button className="display-btn" variant="outlined">
+                    {type.name}
+                  </Button>
+                </div>
+              </Grid>
+            ))}
+          </Grid>
+          <div className="navigation-container">
+            <IconButton
+              disabled={pokemon.types.previous === null}
+              onClick={() => {
+                handleTypePrevClick(pokemon.types.previous);
+              }}
+              size="large"
+            >
+              <NavigateBeforeIcon className="nav-icon" />
+            </IconButton>
+            <IconButton
+              disabled={pokemon.types.next === null}
+              onClick={() => {
+                handleTypeNextClick(pokemon.types.next);
+              }}
+              size="large"
+            >
+              <NavigateNextIcon disabled className="nav-icon" />
+            </IconButton>
+          </div>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Color
+          <Grid container spacing={2}>
+            {pokemon.colors.results.map((color) => (
+              <Grid item xs={4} md={4}>
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <Button className="display-btn" variant="outlined">
+                    {color.name}
+                  </Button>
+                </div>
+              </Grid>
+            ))}
+          </Grid>
+          <div className="navigation-container">
+            <IconButton
+              disabled={pokemon.colors.previous === null}
+              onClick={() => {
+                handleColorPrevClick(pokemon.colors.previous);
+              }}
+              size="large"
+            >
+              <NavigateBeforeIcon className="nav-icon" />
+            </IconButton>
+            <IconButton
+              disabled={pokemon.colors.next === null}
+              onClick={() => {
+                handleColorNextClick(pokemon.colors.next);
+              }}
+              size="large"
+            >
+              <NavigateNextIcon disabled className="nav-icon" />
+            </IconButton>
+          </div>
         </TabPanel>
       </Box>
     </div>

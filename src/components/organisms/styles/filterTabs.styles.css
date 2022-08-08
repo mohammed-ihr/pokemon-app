@@ -1,4 +1,9 @@
-.filter-tabs .ability-btn {
+.filter-tabs {
+  width: 100%;
+  height: fit-content;
+}
+
+.filter-tabs .display-btn {
   width: 120px;
   height: 80px;
 }
