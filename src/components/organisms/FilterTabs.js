@@ -82,17 +82,17 @@ const FilterTabs = () => {
     actions.setTypes({ ...types, current: url });
   };
 
-  const handleColorPrevClick = async (url) => {
+  const handleFormPrevClick = async (url) => {
     const res = await getDatafromURL(url);
-    const types = await res.json();
-    actions.setColors({ ...types, current: url });
+    const forms = await res.json();
+    actions.setForms({ ...forms, current: url });
   };
 
-  const handleColorNextClick = async (url) => {
-    const current = pokemon.types.current;
+  const handleFormNextClick = async (url) => {
+    const current = pokemon.forms.current;
     const res = await getDatafromURL(url);
-    const types = await res.json();
-    actions.setColors({ ...types, current: url, previous: current });
+    const forms = await res.json();
+    actions.setForms({ ...forms, current: url, previous: current });
   };
 
   return (
@@ -109,9 +109,9 @@ const FilterTabs = () => {
             variant="fullWidth"
             aria-label="full width tabs example"
           >
-            <Tab label="Abilities" {...a11yProps(0)} />
+            <Tab label="Ability" {...a11yProps(0)} />
             <Tab label="Type" {...a11yProps(1)} />
-            <Tab label="Color" {...a11yProps(2)} />
+            <Tab label="Form" {...a11yProps(2)} />
           </Tabs>
         </AppBar>
         <TabPanel value={value} index={0} dir={theme.direction}>
@@ -182,11 +182,11 @@ const FilterTabs = () => {
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
           <Grid container spacing={2}>
-            {pokemon.colors.results.map((color) => (
+            {pokemon.forms.results.map((form) => (
               <Grid item xs={4} md={4}>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                   <Button className="display-btn" variant="outlined">
-                    {color.name}
+                    {form.name}
                   </Button>
                 </div>
               </Grid>
@@ -194,18 +194,18 @@ const FilterTabs = () => {
           </Grid>
           <div className="navigation-container">
             <IconButton
-              disabled={pokemon.colors.previous === null}
+              disabled={pokemon.forms.previous === null}
               onClick={() => {
-                handleColorPrevClick(pokemon.colors.previous);
+                handleFormPrevClick(pokemon.forms.previous);
               }}
               size="large"
             >
               <NavigateBeforeIcon className="nav-icon" />
             </IconButton>
             <IconButton
-              disabled={pokemon.colors.next === null}
+              disabled={pokemon.forms.next === null}
               onClick={() => {
-                handleColorNextClick(pokemon.colors.next);
+                handleFormNextClick(pokemon.forms.next);
               }}
               size="large"
             >

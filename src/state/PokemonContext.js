@@ -6,7 +6,7 @@ export function PokemonProvider({ children }) {
   const [pokemon, setPokemon] = useState({
     abilities: { results: [] },
     types: { results: [] },
-    colors: { results: [] },
+    forms: { results: [] },
     pokemons: {},
     selectedPokemon: {
       name: "Pikachu",
@@ -25,7 +25,7 @@ export function PokemonProvider({ children }) {
     selectedTab: 0,
     selectedAbility: "",
     selectedType: "",
-    selectedColor: "",
+    selectedForm: "",
   });
 
   const actions = {
@@ -35,8 +35,8 @@ export function PokemonProvider({ children }) {
     setAbilities: (abilities) =>
       setPokemon((prevState) => ({ ...prevState, abilities })),
     setTypes: (types) => setPokemon((prevState) => ({ ...prevState, types })),
-    setColors: (colors) =>
-      setPokemon((prevState) => ({ ...prevState, colors })),
+    setForms: (forms) =>
+      setPokemon((prevState) => ({ ...prevState, forms })),
     setPokemons: (pokemons) =>
       setPokemon((prevState) => ({ ...prevState, pokemons })),
     setSelectedPokemon: (selectedPokemon) =>
@@ -53,8 +53,8 @@ export function PokemonProvider({ children }) {
       setFilterInput((prevState) => ({ ...prevState, selectedAbility })),
     setSelectedType: (selectedType) =>
       setFilterInput((prevState) => ({ ...prevState, selectedType })),
-    setSelectedColor: (selectedColor) =>
-      setFilterInput((prevState) => ({ ...prevState, selectedColor })),
+    setSelectedForm: (selectedForm) =>
+      setFilterInput((prevState) => ({ ...prevState, selectedForm })),
 
     // ==============================================================================
   };

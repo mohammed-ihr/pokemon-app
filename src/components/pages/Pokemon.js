@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import PokemonFilter from "../organisms/PokemonFilter";
 import AppBar from "../molecules/AppBar";
 import "./styles/pokemon.styles.css";
-import { getAbilities, getColors, getTypes } from "../../network/pokemon.api";
+import { getAbilities, getForms, getTypes } from "../../network/pokemon.api";
 import PokemonContext from "../../state/PokemonContext";
 import PokemonDisplay from "../organisms/PokemonDisplay";
 
@@ -13,26 +13,25 @@ const Pokemon = () => {
   const populateAbbilities = async () => {
     const res = await getAbilities();
     const abilities = await res.json();
-    actions.setAbilities({...abilities, current: res.url});
+    actions.setAbilities({ ...abilities, current: res.url });
   };
 
   const populateTypes = async () => {
-    const res = await getTypes()
+    const res = await getTypes();
     const types = await res.json();
-    actions.setTypes({...types, current: res.url});
+    actions.setTypes({ ...types, current: res.url });
   };
 
-
-  const populateColors = async () => {
-    const res = await getColors()
-    const colors = await res.json();
-    actions.setColors({...colors, current: res.url});
+  const populateForms = async () => {
+    const res = await getForms();
+    const formss = await res.json();
+    actions.setForms({ ...formss, current: res.url });
   };
 
   useEffect(() => {
     populateAbbilities();
     populateTypes();
-    populateColors();
+    populateForms();
 
     // eslint-disable-next-line
   }, []);
