@@ -57,6 +57,7 @@ export function PokemonProvider({ children }) {
     selectedAbility: "",
     currentAbilityPage: 1,
     selectedType: "",
+    currentTypePage: 1,
   });
 
   const actions = {
@@ -79,6 +80,7 @@ export function PokemonProvider({ children }) {
       setFilterInput((prevState) => ({ ...prevState, searchKeyword })),
     setSelectedTab: (selectedTab) =>
       setFilterInput((prevState) => ({ ...prevState, selectedTab })),
+
     setSelectedAbility: (selectedAbility) =>
       setFilterInput((prevState) => ({ ...prevState, selectedAbility })),
     setCurrentAbilityPage: (pageNo) =>
@@ -86,8 +88,14 @@ export function PokemonProvider({ children }) {
         ...prevState,
         currentAbilityPage: pageNo,
       })),
+
     setSelectedType: (selectedType) =>
       setFilterInput((prevState) => ({ ...prevState, selectedType })),
+    setCurrentTypePage: (pageNo) =>
+      setFilterInput((prevState) => ({
+        ...prevState,
+        currentTypePage: pageNo,
+      })),
 
     // ==============================================================================
   };

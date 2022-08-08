@@ -1,9 +1,5 @@
-import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import NavigateNextIcon from "@mui/icons-material/NavigateNext";
-import { Button, IconButton } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
 import { useTheme } from "@mui/material/styles";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
@@ -12,7 +8,7 @@ import PropTypes from "prop-types";
 import { useContext, useState } from "react";
 import { getDatafromURL } from "../../network/pokemon.api";
 import PokemonContext from "../../state/PokemonContext";
-import PaginatedItems from "./PaginatedItems";
+import PaginatedItems from "../molecules/PaginatedItems";
 import "./styles/filterTabs.styles.css";
 
 function TabPanel(props) {
@@ -57,20 +53,7 @@ const FilterTabs = () => {
     setValue(newValue);
   };
 
-  const handleTypeNextClick = async (url) => {
-    const current = pokemon.types.current;
-    const res = await getDatafromURL(url);
-    const types = await res.json();
-    actions.setTypes({ ...types, current: url, previous: current });
-  };
-
-  const handleTypePrevClick = async (url) => {
-    const res = await getDatafromURL(url);
-    const types = await res.json();
-    actions.setTypes({ ...types, current: url });
-  };
-
-  const handleAbilityClick = async (url) => {
+  const handleClickInsidePagination = async (url) => {
     const res = await getDatafromURL(url);
     const ability = await res.json();
     const pokemons = ability.pokemon.map((data) => data.pokemon);
@@ -101,76 +84,17 @@ const FilterTabs = () => {
             currentPage={filterInput.currentAbilityPage}
             limit={12}
             setPage={(pageNo) => actions.setCurrentAbilityPage(pageNo)}
-            onClick={(data) => handleAbilityClick(data.url)}
+            onClick={(data) => handleClickInsidePagination(data.url)}
           />
-          {/* <Grid container spacing={2}>
-            {pokemon.abilities.results.map((ability) => (
-              <Grid item xs={4} md={4}>
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <Button
-                    className="display-btn"
-                    variant="outlined"
-                    onClick={() => handleAbilityClick(ability.url)}
-                  >
-                    {ability.name}
-                  </Button>
-                </div>
-              </Grid>
-            ))}
-          </Grid>
-          <div className="navigation-container">
-            <IconButton
-              disabled={pokemon.abilities.previous === null}
-              onClick={() => {
-                handleAbilityPrevClick(pokemon.abilities.previous);
-              }}
-              size="large"
-            >
-              <NavigateBeforeIcon className="nav-icon" />
-            </IconButton>
-            <IconButton
-              disabled={pokemon.abilities.next === null}
-              onClick={() => {
-                handleAbilityNextClick(pokemon.abilities.next);
-              }}
-              size="large"
-            >
-              <NavigateNextIcon disabled className="nav-icon" />
-            </IconButton>
-          </div> */}
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <Grid container spacing={2}>
-            {pokemon.types.results.map((type) => (
-              <Grid item xs={4} md={4}>
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                  <Button className="display-btn" variant="outlined">
-                    {type.name}
-                  </Button>
-                </div>
-              </Grid>
-            ))}
-          </Grid>
-          <div className="navigation-container">
-            <IconButton
-              disabled={pokemon.types.previous === null}
-              onClick={() => {
-                handleTypePrevClick(pokemon.types.previous);
-              }}
-              size="large"
-            >
-              <NavigateBeforeIcon className="nav-icon" />
-            </IconButton>
-            <IconButton
-              disabled={pokemon.types.next === null}
-              onClick={() => {
-                handleTypeNextClick(pokemon.types.next);
-              }}
-              size="large"
-            >
-              <NavigateNextIcon disabled className="nav-icon" />
-            </IconButton>
-          </div>
+          <PaginatedItems
+            data={pokemon.types.results}
+            currentPage={filterInput.currentTypePage}
+            limit={12}
+            setPage={(pageNo) => actions.setCurrentTypePage(pageNo)}
+            onClick={(data) => handleClickInsidePagination(data.url)}
+          />
         </TabPanel>
       </Box>
     </div>

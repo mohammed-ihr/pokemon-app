@@ -5,7 +5,7 @@ const getAbilities = () => {
 };
 
 const getTypes = () => {
-  return fetch("https://pokeapi.co/api/v2/type/?limit=12");
+  return fetch(`https://pokeapi.co/api/v2/type/?limit=${dataLimit}`);
 };
 
 const getSinglePokemon = (pokemon) => {
