@@ -22,16 +22,10 @@ const Pokemon = () => {
     actions.setTypes({ ...types, current: res.url });
   };
 
-  const populateForms = async () => {
-    const res = await getForms();
-    const formss = await res.json();
-    actions.setForms({ ...formss, current: res.url });
-  };
 
   useEffect(() => {
     populateAbbilities();
     populateTypes();
-    populateForms();
 
     // eslint-disable-next-line
   }, []);
