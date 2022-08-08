@@ -1,5 +1,7 @@
+import { dataLimit } from "../common/constants";
+
 const getAbilities = () => {
-  return fetch("https://pokeapi.co/api/v2/ability/?limit=12");
+  return fetch(`https://pokeapi.co/api/v2/ability/?limit=${dataLimit}`);
 };
 
 const getTypes = () => {

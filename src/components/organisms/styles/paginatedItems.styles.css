@@ -1,0 +1,8 @@
+.paginated-items .grid-container {
+  min-height: 390px;
+}
+.paginated-items .pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

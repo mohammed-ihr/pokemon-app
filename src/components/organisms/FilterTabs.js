@@ -12,6 +12,7 @@ import PropTypes from "prop-types";
 import { useContext, useState } from "react";
 import { getDatafromURL } from "../../network/pokemon.api";
 import PokemonContext from "../../state/PokemonContext";
+import PaginatedItems from "./PaginatedItems";
 import "./styles/filterTabs.styles.css";
 
 function TabPanel(props) {
@@ -48,25 +49,12 @@ function a11yProps(index) {
 }
 
 const FilterTabs = () => {
-  const { pokemon, actions } = useContext(PokemonContext);
+  const { pokemon, filterInput, actions } = useContext(PokemonContext);
   const theme = useTheme();
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-
-  const handleAbilityNextClick = async (url) => {
-    const current = pokemon.abilities.current;
-    const res = await getDatafromURL(url);
-    const abilities = await res.json();
-    actions.setAbilities({ ...abilities, current: url, previous: current });
-  };
-
-  const handleAbilityPrevClick = async (url) => {
-    const res = await getDatafromURL(url);
-    const abilities = await res.json();
-    actions.setAbilities({ ...abilities, current: url });
   };
 
   const handleTypeNextClick = async (url) => {
@@ -108,7 +96,14 @@ const FilterTabs = () => {
           </Tabs>
         </AppBar>
         <TabPanel value={value} index={0} dir={theme.direction}>
-          <Grid container spacing={2}>
+          <PaginatedItems
+            data={pokemon.abilities.results}
+            currentPage={filterInput.currentAbilityPage}
+            limit={12}
+            setPage={(pageNo) => actions.setCurrentAbilityPage(pageNo)}
+            onClick={(data) => handleAbilityClick(data.url)}
+          />
+          {/* <Grid container spacing={2}>
             {pokemon.abilities.results.map((ability) => (
               <Grid item xs={4} md={4}>
                 <div style={{ display: "flex", justifyContent: "center" }}>
@@ -142,7 +137,7 @@ const FilterTabs = () => {
             >
               <NavigateNextIcon disabled className="nav-icon" />
             </IconButton>
-          </div>
+          </div> */}
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <Grid container spacing={2}>

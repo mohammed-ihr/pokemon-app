@@ -55,6 +55,7 @@ export function PokemonProvider({ children }) {
     searchKeyword: "",
     selectedTab: 0,
     selectedAbility: "",
+    currentAbilityPage: 1,
     selectedType: "",
   });
 
@@ -64,6 +65,7 @@ export function PokemonProvider({ children }) {
 
     setAbilities: (abilities) =>
       setPokemon((prevState) => ({ ...prevState, abilities })),
+
     setTypes: (types) => setPokemon((prevState) => ({ ...prevState, types })),
     setPokemons: (pokemons) =>
       setPokemon((prevState) => ({ ...prevState, pokemons })),
@@ -79,6 +81,11 @@ export function PokemonProvider({ children }) {
       setFilterInput((prevState) => ({ ...prevState, selectedTab })),
     setSelectedAbility: (selectedAbility) =>
       setFilterInput((prevState) => ({ ...prevState, selectedAbility })),
+    setCurrentAbilityPage: (pageNo) =>
+      setFilterInput((prevState) => ({
+        ...prevState,
+        currentAbilityPage: pageNo,
+      })),
     setSelectedType: (selectedType) =>
       setFilterInput((prevState) => ({ ...prevState, selectedType })),
 
