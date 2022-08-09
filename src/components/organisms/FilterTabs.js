@@ -73,9 +73,7 @@ const FilterTabs = () => {
 
   return (
     <div className="filter-tabs">
-      <Box
-        sx={{ bgcolor: "background.paper", width: "100%", marginRight: "10px" }}
-      >
+      <Box sx={{ width: "100%", marginRight: "10px" }}>
         <AppBar position="static">
           <Tabs
             value={value}
@@ -96,7 +94,7 @@ const FilterTabs = () => {
             limit={12}
             setPage={(pageNo) => actions.setCurrentAbilityPage(pageNo)}
             onClick={(data) => handleAbilityClick(data)}
-            selected = {filterInput.selectedAbility}
+            selected={filterInput.selectedAbility}
           />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
@@ -106,7 +104,7 @@ const FilterTabs = () => {
             limit={12}
             setPage={(pageNo) => actions.setCurrentTypePage(pageNo)}
             onClick={(data) => handleTypeClick(data)}
-            selected = {filterInput.selectedType}
+            selected={filterInput.selectedType}
           />
         </TabPanel>
       </Box>

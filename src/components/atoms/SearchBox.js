@@ -6,6 +6,7 @@ const SearchBox = (props) => {
   return (
     <div className="search-box">
       <TextField
+        className="search-text-field"
         id="outlined-basic"
         placeholder="Search..."
         variant="outlined"

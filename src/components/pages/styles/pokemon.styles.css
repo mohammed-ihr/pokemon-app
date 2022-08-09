@@ -1,9 +1,26 @@
-.pokemon .app-bar {
-  margin-bottom: 20px;
+.pokemon {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
 }
 
+.pokemon .app-bar{
+  /* flex: 0 1 auto; */
+  /* display: flex;
+  flex-flow: column; */
+}
+.pokemon .pokemon-contents{
+  /* flex: 1 1 auto;
+  background-color: royalblue; */
+}
+
+.pokemon .filter-container {
+  padding-top: 20px;
+  background-color: #000;
+}
 .pokemon .display-container {
+  padding-top: 20px;
+  background-color: #f6ecde;
   display: flex;
-  justify-content:center ;
-  /* background-color: red; */
+  justify-content: center;
 }

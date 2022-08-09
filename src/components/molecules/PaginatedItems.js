@@ -19,7 +19,11 @@ const PaginatedItems = (props) => {
             <Grid item xs={4} md={4}>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <Button
-                  className={item.name === selected ? "display-btn-selected" : "display-btn"}
+                  className={
+                    item.name === selected
+                      ? "display-btn-selected"
+                      : "display-btn"
+                  }
                   variant="outlined"
                   onClick={() => onClick(item)}
                 >
@@ -32,6 +36,8 @@ const PaginatedItems = (props) => {
       </div>
       <div className="pagination-container">
         <Pagination
+          // variant="outlined"
+          style={{color:'yellow'}}
           count={noOfPages}
           page={currentPage}
           onChange={(event, page) => {

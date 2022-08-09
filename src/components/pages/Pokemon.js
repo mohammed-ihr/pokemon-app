@@ -15,7 +15,7 @@ const Pokemon = () => {
     const res = await getAbilities();
     let abilities = await res.json();
     abilities = sortArrayOfObjectsByProperty(abilities.results, "name");
-    console.log(abilities)
+    console.log(abilities);
     actions.setAbilities(abilities);
   };
 
@@ -38,16 +38,20 @@ const Pokemon = () => {
       <div className="app-bar">
         <AppBar />
       </div>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
-          <PokemonFilter />
+      <div className="pokemon-contents">
+        <Grid container>
+          <Grid item xs={12} md={6}>
+            <div className="filter-container">
+              <PokemonFilter />
+            </div>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <div className="display-container">
+              <PokemonDisplay />
+            </div>
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <div className="display-container">
-            <PokemonDisplay />
-          </div>
-        </Grid>
-      </Grid>
+      </div>
     </div>
   );
 };

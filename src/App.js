@@ -1,16 +1,58 @@
+import { createTheme, ThemeProvider } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Pokemon from "./components/pages/Pokemon";
 import UserInfo from "./components/pages/UserInfo";
 import { PokemonProvider } from "./state/PokemonContext";
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#CC0000",
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        outlined: {
+          color: "#FFDE00",
+          border: "4px solid #CC0000",
+          "&:hover": {
+            color: "#FFDE00",
+            border: "4px solid #FFDE00",
+            fontWeight:'bold'
+          },
+        },
+      },
+    },
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          color: "white",
+        },
+      },
+    },
+  },
+  typography: {
+    fontFamily: [
+      "monospace",
+      "Roboto",
+      "Helvetica Neue",
+      "Arial",
+      "sans-serif",
+    ].join(","),
+  },
+});
+
 function App() {
   return (
     <PokemonProvider>
-      <Routes>
-        <Route path="/" element={<UserInfo />} />
-        <Route path="/pokemon" element={<Pokemon />} />
-      </Routes>
+      <ThemeProvider theme={theme}>
+        <Routes>
+          <Route path="/" element={<UserInfo />} />
+          <Route path="/pokemon" element={<Pokemon />} />
+        </Routes>
+      </ThemeProvider>
     </PokemonProvider>
   );
 }
