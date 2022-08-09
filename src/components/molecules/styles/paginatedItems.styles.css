@@ -6,3 +6,15 @@
   justify-content: center;
   margin-top: 20px;
 }
+
+.paginated-items .display-btn {
+  width: 120px;
+  height: 80px;
+}
+
+.paginated-items .display-btn-selected {
+  width: 120px;
+  height: 80px;
+  background-color: skyblue;
+  color: red;
+}

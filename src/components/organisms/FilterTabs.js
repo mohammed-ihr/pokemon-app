@@ -56,10 +56,19 @@ const FilterTabs = () => {
 
   const handleClickInsidePagination = async (url) => {
     const res = await getDatafromURL(url);
-    const ability = await res.json();
-    let pokemons = ability.pokemon.map((data) => data.pokemon);
+    const resJson = await res.json();
+    let pokemons = resJson.pokemon.map((data) => data.pokemon);
     pokemons = sortArrayOfObjectsByProperty(pokemons, "name");
     actions.setPokemons(pokemons);
+  };
+
+  const handleAbilityClick = (data) => {
+    actions.setSelectedAbility(data.name);
+    handleClickInsidePagination(data.url);
+  };
+  const handleTypeClick = (data) => {
+    actions.setSelectedType(data.name);
+    handleClickInsidePagination(data.url);
   };
 
   return (
@@ -86,7 +95,8 @@ const FilterTabs = () => {
             currentPage={filterInput.currentAbilityPage}
             limit={12}
             setPage={(pageNo) => actions.setCurrentAbilityPage(pageNo)}
-            onClick={(data) => handleClickInsidePagination(data.url)}
+            onClick={(data) => handleAbilityClick(data)}
+            selected = {filterInput.selectedAbility}
           />
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
@@ -95,7 +105,8 @@ const FilterTabs = () => {
             currentPage={filterInput.currentTypePage}
             limit={12}
             setPage={(pageNo) => actions.setCurrentTypePage(pageNo)}
-            onClick={(data) => handleClickInsidePagination(data.url)}
+            onClick={(data) => handleTypeClick(data)}
+            selected = {filterInput.selectedType}
           />
         </TabPanel>
       </Box>

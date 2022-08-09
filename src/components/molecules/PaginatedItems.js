@@ -4,7 +4,7 @@ import Pagination from "@mui/material/Pagination";
 import "./styles/paginatedItems.styles.css";
 
 const PaginatedItems = (props) => {
-  const { data, currentPage, limit, setPage, onClick } = props;
+  const { data, currentPage, limit, setPage, onClick, selected } = props;
 
   const noOfPages = Math.ceil(data.length / limit);
   const start = (currentPage - 1) * limit;
@@ -19,7 +19,7 @@ const PaginatedItems = (props) => {
             <Grid item xs={4} md={4}>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <Button
-                  className="display-btn"
+                  className={item.name === selected ? "display-btn-selected" : "display-btn"}
                   variant="outlined"
                   onClick={() => onClick(item)}
                 >

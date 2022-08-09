@@ -1,11 +1,11 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const PokemonContext = createContext();
 
 export function PokemonProvider({ children }) {
   const [pokemon, setPokemon] = useState({
-    abilities:  [],
-    types: [] ,
+    abilities: [],
+    types: [],
     pokemons: [
       {
         name: "hitmonlee",
@@ -99,6 +99,25 @@ export function PokemonProvider({ children }) {
 
     // ==============================================================================
   };
+  useEffect(() => {
+    console.log("hello ", filterInput);
+  }, [filterInput]);
+
+  useEffect(() => {
+    if (filterInput.selectedAbility !== "") {
+      actions.setSelectedType("");
+      actions.setSearchKeyword("");
+    }
+    // eslint-disable-next-line
+  }, [filterInput.selectedAbility]);
+
+  useEffect(() => {
+    if (filterInput.selectedType !== "") {
+      actions.setSelectedAbility("");
+      actions.setSearchKeyword("");
+    }
+    // eslint-disable-next-line
+  }, [filterInput.selectedType]);
 
   return (
     <PokemonContext.Provider value={{ pokemon, filterInput, actions }}>
