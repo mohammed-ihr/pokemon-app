@@ -1,26 +1,31 @@
 .pokemon {
   display: flex;
-  flex-flow: column;
-  height: 100%;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.pokemon .app-bar{
-  /* flex: 0 1 auto; */
-  /* display: flex;
-  flex-flow: column; */
-}
-.pokemon .pokemon-contents{
-  /* flex: 1 1 auto;
-  background-color: royalblue; */
+.pokemon .pokemon-contents {
+  background-color: #000;
+  display: flex;
+  flex-grow: 1;
 }
 
 .pokemon .filter-container {
   padding-top: 20px;
   background-color: #000;
+  height: 100%;
+  flex: 1;
 }
 .pokemon .display-container {
-  padding-top: 20px;
-  background-color: #f6ecde;
+  flex: 1;
   display: flex;
   justify-content: center;
+  padding-top: 20px;
+  background-color: #f6ecde;
+}
+
+@media only screen and (max-width: 850px) {
+  .pokemon .pokemon-contents {
+    flex-direction: column;
+  }
 }

@@ -1,5 +1,6 @@
 .pokemon-filter {
 	padding: 0px 10px;
+  height: '100%';
 }
 
 .pokemon-filter .search-area {

@@ -1,12 +1,11 @@
 import { useContext, useEffect } from "react";
-import Grid from "@mui/material/Grid";
-import PokemonFilter from "../organisms/PokemonFilter";
-import AppBar from "../molecules/AppBar";
-import "./styles/pokemon.styles.css";
+import { sortArrayOfObjectsByProperty } from "../../common/commonFunctions";
 import { getAbilities, getTypes } from "../../network/pokemon.api";
 import PokemonContext from "../../state/PokemonContext";
+import AppBar from "../molecules/AppBar";
 import PokemonDisplay from "../organisms/PokemonDisplay";
-import { sortArrayOfObjectsByProperty } from "../../common/commonFunctions";
+import PokemonFilter from "../organisms/PokemonFilter";
+import "./styles/pokemon.styles.css";
 
 const Pokemon = () => {
   const { actions } = useContext(PokemonContext);
@@ -15,7 +14,6 @@ const Pokemon = () => {
     const res = await getAbilities();
     let abilities = await res.json();
     abilities = sortArrayOfObjectsByProperty(abilities.results, "name");
-    console.log(abilities);
     actions.setAbilities(abilities);
   };
 
@@ -39,18 +37,12 @@ const Pokemon = () => {
         <AppBar />
       </div>
       <div className="pokemon-contents">
-        <Grid container>
-          <Grid item xs={12} md={6}>
-            <div className="filter-container">
-              <PokemonFilter />
-            </div>
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <div className="display-container">
-              <PokemonDisplay />
-            </div>
-          </Grid>
-        </Grid>
+        <div className="filter-container">
+          <PokemonFilter />
+        </div>
+        <div className="display-container">
+          <PokemonDisplay />
+        </div>
       </div>
     </div>
   );

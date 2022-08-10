@@ -99,9 +99,6 @@ export function PokemonProvider({ children }) {
 
     // ==============================================================================
   };
-  useEffect(() => {
-    console.log("hello ", filterInput);
-  }, [filterInput]);
 
   useEffect(() => {
     if (filterInput.selectedAbility !== "") {
