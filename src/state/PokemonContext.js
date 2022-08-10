@@ -37,8 +37,10 @@ export function PokemonProvider({ children }) {
   });
 
   const actions = {
-    // ==============================================================================
-    // actions related to updating pokemon data
+
+  // ==============================================================================
+  // actions related to updating pokemon data
+  // ==============================================================================
 
     setAbilities: (abilities) =>
       setPokemon((prevState) => ({ ...prevState, abilities })),
@@ -49,8 +51,9 @@ export function PokemonProvider({ children }) {
     setSelectedPokemon: (selectedPokemon) =>
       setPokemon((prevState) => ({ ...prevState, selectedPokemon })),
 
-    // ==============================================================================
-    //  actions related to updating filter criteria
+  // ==============================================================================
+  //  actions related to updating filter criteria
+  // ==============================================================================
 
     setSearchKeyword: (searchKeyword) =>
       setFilterInput((prevState) => ({ ...prevState, searchKeyword })),
@@ -78,7 +81,8 @@ export function PokemonProvider({ children }) {
         ...prevState,
         selectedIndexInAutoComplete: index,
       })),
-    // ==============================================================================
+
+  // ==============================================================================
   };
 
   useEffect(() => {

@@ -4,6 +4,7 @@ import "./App.css";
 import Pokemon from "./components/pages/Pokemon";
 import UserInfo from "./components/pages/UserInfo";
 import { PokemonProvider } from "./state/PokemonContext";
+import { UserProvider } from "./state/UserContext";
 
 const theme = createTheme({
   palette: {
@@ -20,7 +21,7 @@ const theme = createTheme({
           "&:hover": {
             color: "#FFDE00",
             border: "4px solid #FFDE00",
-            fontWeight:'bold'
+            fontWeight: "bold",
           },
         },
       },
@@ -46,14 +47,16 @@ const theme = createTheme({
 
 function App() {
   return (
-    <PokemonProvider>
-      <ThemeProvider theme={theme}>
-        <Routes>
-          <Route path="/" element={<UserInfo />} />
-          <Route path="/pokemon" element={<Pokemon />} />
-        </Routes>
-      </ThemeProvider>
-    </PokemonProvider>
+    <UserProvider>
+      <PokemonProvider>
+        <ThemeProvider theme={theme}>
+          <Routes>
+            <Route path="/" element={<UserInfo />} />
+            <Route path="/pokemon" element={<Pokemon />} />
+          </Routes>
+        </ThemeProvider>
+      </PokemonProvider>
+    </UserProvider>
   );
 }
 

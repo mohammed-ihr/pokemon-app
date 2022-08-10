@@ -1,39 +1,13 @@
 import { Button, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-import {
-  getUserFromLocalStorage,
-  setUserToLocalStorage,
-} from "../../helpers/localStorage";
+import UserContext from "../../state/UserContext";
 import "./styles/userInfoForm.styles.css";
 
 const UserInfoForm = () => {
+  const { actions, user, error } = useContext(UserContext);
   let navigate = useNavigate();
-
-  const [error, setError] = useState({
-    firstName: false,
-    lastName: false,
-    phoneNumber: false,
-    address: false,
-  });
-
-  const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
-    phoneNumber: "",
-    address: "",
-  });
-
-  useEffect(() => {
-    const userFromLocalStorage = getUserFromLocalStorage();
-    if (userFromLocalStorage) setUser(userFromLocalStorage);
-  }, []);
-
-  useEffect(() => {
-    setUserToLocalStorage(user);
-  }, [user]);
 
   const isDisabled = () => {
     if (Object.values(user).some((info) => info === "")) return true;
@@ -66,11 +40,8 @@ const UserInfoForm = () => {
                 e.target.value.trim()
               );
             }
-            setError({
-              ...error,
-              firstName: !isValid,
-            });
-            setUser({ ...user, firstName: e.target.value });
+            actions.setFirstNameError(!isValid);
+            actions.setFirstName(e.target.value);
           }}
         />
       </div>
@@ -91,11 +62,8 @@ const UserInfoForm = () => {
                 e.target.value.trim()
               );
             }
-            setError({
-              ...error,
-              lastName: !isValid,
-            });
-            setUser({ ...user, lastName: e.target.value });
+            actions.setLastNameError(!isValid);
+            actions.setLastName(e.target.value);
           }}
         />
       </div>
@@ -118,24 +86,21 @@ const UserInfoForm = () => {
               e.target.value.length > 14
             )
               return;
-            setUser({ ...user, phoneNumber: e.target.value });
+
+            actions.setPhoneNumber(e.target.value);
             var phoneRegex =
               /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
             if (phoneRegex.test(e.target.value)) {
-              setError({
-                ...error,
-                phoneNumber: false,
-              });
+              actions.setPhoneNumberError(false);
               let formattedPhoneNumber = e.target.value.replace(
                 phoneRegex,
                 "($1) $2-$3"
               );
-              setUser({ ...user, phoneNumber: formattedPhoneNumber });
+              actions.setPhoneNumber(formattedPhoneNumber);
             } else {
-              setError({
-                ...error,
-                phoneNumber: e.target.value.length > 0 ? true : false,
-              });
+              actions.setPhoneNumberError(
+                e.target.value.length > 0 ? true : false
+              );
             }
           }}
         />
@@ -150,7 +115,7 @@ const UserInfoForm = () => {
           variant="standard"
           value={user.address}
           onChange={(e) => {
-            setUser({ ...user, address: e.target.value });
+            actions.setAddress(e.target.value);
           }}
         />
       </div>
