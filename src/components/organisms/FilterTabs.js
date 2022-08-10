@@ -6,10 +6,13 @@ import Tabs from "@mui/material/Tabs";
 import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import { useContext, useState } from "react";
-import { getDatafromURL } from "../../network/pokemon.api";
+import { getDatafromURL, getSinglePokemon } from "../../network/pokemon.api";
 import PokemonContext from "../../state/PokemonContext";
 import PaginatedItems from "../molecules/PaginatedItems";
-import { sortArrayOfObjectsByProperty } from "../../common/commonFunctions";
+import {
+  addOrderedIdTOArrayOfObjects,
+  sortArrayOfObjectsByProperty,
+} from "../../common/commonFunctions";
 import "./styles/filterTabs.styles.css";
 
 function TabPanel(props) {
@@ -59,7 +62,16 @@ const FilterTabs = () => {
     const resJson = await res.json();
     let pokemons = resJson.pokemon.map((data) => data.pokemon);
     pokemons = sortArrayOfObjectsByProperty(pokemons, "name");
+    pokemons = addOrderedIdTOArrayOfObjects(pokemons);
     actions.setPokemons(pokemons);
+
+    // get the first pokemon data from the list
+    if (pokemons.length > 0) {
+      const pokemonRes = await getSinglePokemon(pokemons[0].name);
+      const pokemon = await pokemonRes.json();
+      actions.setSelectedPokemon(pokemon);
+      actions.setSelectedIndexInAutoComplete(0);
+    }
   };
 
   const handleAbilityClick = (data) => {

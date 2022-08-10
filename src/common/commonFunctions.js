@@ -12,3 +12,8 @@ export const sortArrayOfObjectsByProperty = (items, name) => {
   });
   return result;
 };
+
+export const addOrderedIdTOArrayOfObjects = (items) => {
+  const result = items.map((data, idx) => ({ id: idx, ...data }));
+  return result;
+};

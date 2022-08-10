@@ -11,9 +11,19 @@ const PokemonFilter = () => {
 
   const handleSearchButtonClick = async () => {
     try {
-      const res = await getSinglePokemon(filterInput.searchKeyword);
+      const res = await getSinglePokemon(
+        filterInput.searchKeyword.toLowerCase()
+      );
       const pokemon = await res.json();
       actions.setSelectedPokemon(pokemon);
+
+      // clear the other filters
+      actions.setSelectedAbility("");
+      actions.setSelectedType("");
+
+      // show the pokemon on the drop down menu
+      actions.setPokemons([pokemon]);
+      actions.setSelectedIndexInAutoComplete(0);
     } catch (error) {
       console.log(error);
     }
@@ -27,6 +37,7 @@ const PokemonFilter = () => {
             onChange={(e) => {
               actions.setSearchKeyword(e.target.value);
             }}
+            onEnterKeyPressed={handleSearchButtonClick}
           />
         </div>
         <Button

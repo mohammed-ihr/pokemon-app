@@ -6,32 +6,7 @@ export function PokemonProvider({ children }) {
   const [pokemon, setPokemon] = useState({
     abilities: [],
     types: [],
-    pokemons: [
-      {
-        name: "hitmonlee",
-        url: "https://pokeapi.co/api/v2/pokemon/106/",
-      },
-      {
-        name: "zxxnlee",
-        url: "https://pokeapi.co/api/v2/pokemon/106/",
-      },
-      {
-        name: "lokonlee",
-        url: "https://pokeapi.co/api/v2/pokemon/106/",
-      },
-      {
-        name: "jjnnj",
-        url: "https://pokeapi.co/api/v2/pokemon/106/",
-      },
-      {
-        name: "jjjjj",
-        url: "https://pokeapi.co/api/v2/pokemon/106/",
-      },
-      {
-        name: "jjjs",
-        url: "https://pokeapi.co/api/v2/pokemon/106/",
-      },
-    ],
+    pokemons: [],
 
     selectedPokemon: {
       name: "Pikachu",
@@ -58,6 +33,7 @@ export function PokemonProvider({ children }) {
     currentAbilityPage: 1,
     selectedType: "",
     currentTypePage: 1,
+    selectedIndexInAutoComplete: 0,
   });
 
   const actions = {
@@ -97,6 +73,11 @@ export function PokemonProvider({ children }) {
         currentTypePage: pageNo,
       })),
 
+    setSelectedIndexInAutoComplete: (index) =>
+      setFilterInput((prevState) => ({
+        ...prevState,
+        selectedIndexInAutoComplete: index,
+      })),
     // ==============================================================================
   };
 
