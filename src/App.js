@@ -1,6 +1,7 @@
 import { createTheme, ThemeProvider } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import Confirmation from "./components/pages/Confirmation";
 import Pokemon from "./components/pages/Pokemon";
 import UserInfo from "./components/pages/UserInfo";
 import { PokemonProvider } from "./state/PokemonContext";
@@ -53,6 +54,7 @@ function App() {
           <Routes>
             <Route path="/" element={<UserInfo />} />
             <Route path="/pokemon" element={<Pokemon />} />
+            <Route path="/confirmation" element={<Confirmation />} />
           </Routes>
         </ThemeProvider>
       </PokemonProvider>

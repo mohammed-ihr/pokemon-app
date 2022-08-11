@@ -163,8 +163,9 @@ const PokemonDisplay = () => {
         ) : (
           <div className="helper-text">
             <Typography variant="subtitle1" component="div">
-              Welcome to the arena! Start searching a Pokémon by directly typing the name in the
-              search box or browse Pokémons by filtering with Ability or Type.
+              Welcome to the arena! Start searching a Pokémon by directly typing
+              the name in the search box or browse Pokémons by filtering with
+              Ability or Type.
             </Typography>
           </div>
         )}

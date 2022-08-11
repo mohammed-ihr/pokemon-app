@@ -1,5 +1,7 @@
 import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router";
 import { sortArrayOfObjectsByProperty } from "../../common/commonFunctions";
+import { getUserFromLocalStorage } from "../../helpers/localStorage";
 import { getAbilities, getTypes } from "../../network/pokemon.api";
 import PokemonContext from "../../state/PokemonContext";
 import AppBar from "../molecules/AppBar";
@@ -9,6 +11,7 @@ import "./styles/pokemon.styles.css";
 
 const Pokemon = () => {
   const { actions } = useContext(PokemonContext);
+  const navigate = useNavigate();
 
   const populateAbbilities = async () => {
     const res = await getAbilities();
@@ -25,6 +28,14 @@ const Pokemon = () => {
   };
 
   useEffect(() => {
+    if (
+      getUserFromLocalStorage() === null ||
+      getUserFromLocalStorage().firstName === ""
+    ) {
+      navigate("/");
+      return;
+    }
+
     populateAbbilities();
     populateTypes();
 

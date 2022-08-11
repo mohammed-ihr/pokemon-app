@@ -7,6 +7,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import { forwardRef, useContext } from "react";
+import { useNavigate } from "react-router";
 import { findPokemonImage } from "../../common/commonFunctions";
 import PokemonContext from "../../state/PokemonContext";
 import UserContext from "../../state/UserContext";
@@ -19,6 +20,7 @@ const ConfirmationDialog = (props) => {
   const { open, handleClose } = props;
   const { user } = useContext(UserContext);
   const { pokemon } = useContext(PokemonContext);
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -63,7 +65,18 @@ const ConfirmationDialog = (props) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Go</Button>
+          <Button
+            onClick={() => {
+              navigate("/confirmation", {
+                state: {
+                  name: pokemon.selectedPokemon.name,
+                  imgSrc: findPokemonImage(pokemon.selectedPokemon),
+                },
+              });
+            }}
+          >
+            Go
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
