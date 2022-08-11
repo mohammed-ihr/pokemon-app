@@ -1,46 +1,59 @@
 import { createContext, useState, useEffect } from "react";
+import {
+  getPokemonFilterFromLocalStorage,
+  getPokemonFromLocalStorage,
+  setPokemonFilterToLocalStorage,
+  setPokemonToLocalStorage,
+} from "../helpers/localStorage";
 
 const PokemonContext = createContext();
 
-export function PokemonProvider({ children }) {
-  const [pokemon, setPokemon] = useState({
-    abilities: [],
-    types: [],
-    pokemons: [],
+const initialPokemonState = {
+  abilities: [],
+  types: [],
+  pokemons: [],
 
-    selectedPokemon: {
-      name: "Pikachu",
-      sprites: {
-        other: {
-          dream_world: {
-            front_default: "",
-          },
-          "official-artwork": {
-            front_default: "",
-          },
+  selectedPokemon: {
+    name: "Pikachu",
+    sprites: {
+      other: {
+        dream_world: {
+          front_default: "",
+        },
+        "official-artwork": {
+          front_default: "",
         },
       },
-      abilities: [],
-      types: [],
-      forms: [],
     },
-  });
+    abilities: [],
+    types: [],
+    forms: [],
+  },
+};
 
-  const [filterInput, setFilterInput] = useState({
-    searchKeyword: "",
-    selectedTab: 0,
-    selectedAbility: "",
-    currentAbilityPage: 1,
-    selectedType: "",
-    currentTypePage: 1,
-    selectedIndexInAutoComplete: 0,
-  });
+const initialFilterInput = {
+  searchKeyword: "",
+  selectedTab: 0,
+  selectedAbility: "",
+  currentAbilityPage: 1,
+  selectedType: "",
+  currentTypePage: 1,
+  selectedIndexInAutoComplete: 0,
+};
+
+export function PokemonProvider({ children }) {
+  const [pokemon, setPokemon] = useState(
+    getPokemonFromLocalStorage() ?? initialPokemonState
+  );
+
+  const [filterInput, setFilterInput] = useState(
+    getPokemonFilterFromLocalStorage() ?? initialFilterInput
+  );
 
   const actions = {
-
-  // ==============================================================================
-  // actions related to updating pokemon data
-  // ==============================================================================
+    // ==============================================================================
+    // actions related to updating pokemon data
+    // ==============================================================================
 
     setAbilities: (abilities) =>
       setPokemon((prevState) => ({ ...prevState, abilities })),
@@ -51,9 +64,9 @@ export function PokemonProvider({ children }) {
     setSelectedPokemon: (selectedPokemon) =>
       setPokemon((prevState) => ({ ...prevState, selectedPokemon })),
 
-  // ==============================================================================
-  //  actions related to updating filter criteria
-  // ==============================================================================
+    // ==============================================================================
+    //  actions related to updating filter criteria
+    // ==============================================================================
 
     setSearchKeyword: (searchKeyword) =>
       setFilterInput((prevState) => ({ ...prevState, searchKeyword })),
@@ -82,7 +95,7 @@ export function PokemonProvider({ children }) {
         selectedIndexInAutoComplete: index,
       })),
 
-  // ==============================================================================
+    // ==============================================================================
   };
 
   useEffect(() => {
@@ -100,6 +113,14 @@ export function PokemonProvider({ children }) {
     }
     // eslint-disable-next-line
   }, [filterInput.selectedType]);
+
+  useEffect(() => {
+    setPokemonToLocalStorage(pokemon);
+  }, [pokemon]);
+
+  useEffect(() => {
+    setPokemonFilterToLocalStorage(filterInput);
+  }, [filterInput]);
 
   return (
     <PokemonContext.Provider value={{ pokemon, filterInput, actions }}>

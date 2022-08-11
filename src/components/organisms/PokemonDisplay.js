@@ -114,7 +114,7 @@ const PokemonDisplay = () => {
                   <div style={{ display: "flex", flexWrap: "wrap" }}>
                     {selectedPokemon.abilities.map((data) => {
                       return (
-                        <div className="chip-container">
+                        <div className="chip-container" key={data.ability.name}>
                           <Chip label={data.ability.name} />
                         </div>
                       );
@@ -128,7 +128,7 @@ const PokemonDisplay = () => {
                 <div style={{ display: "flex", flexWrap: "wrap" }}>
                   {selectedPokemon.types.map((data) => {
                     return (
-                      <div className="chip-container">
+                      <div className="chip-container" key={data.type.name}>
                         <Chip label={data.type.name} />
                       </div>
                     );
@@ -141,7 +141,7 @@ const PokemonDisplay = () => {
                 <div style={{ display: "flex", flexWrap: "wrap" }}>
                   {selectedPokemon.forms.map((data) => {
                     return (
-                      <div className="chip-container">
+                      <div className="chip-container" key={data.name}>
                         <Chip label={data.name} />
                       </div>
                     );

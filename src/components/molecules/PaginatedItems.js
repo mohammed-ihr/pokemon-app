@@ -16,7 +16,7 @@ const PaginatedItems = (props) => {
       <div className="grid-container">
         <Grid container spacing={2}>
           {displayData.map((item) => (
-            <Grid item xs={4} md={4}>
+            <Grid item xs={4} md={4} key={item.name}>
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <Button
                   className={
@@ -37,7 +37,7 @@ const PaginatedItems = (props) => {
       <div className="pagination-container">
         <Pagination
           // variant="outlined"
-          style={{color:'yellow'}}
+          style={{ color: "yellow" }}
           count={noOfPages}
           page={currentPage}
           onChange={(event, page) => {

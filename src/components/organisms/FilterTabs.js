@@ -57,7 +57,7 @@ const FilterTabs = () => {
   const [openSnackBar, setOpenSnackBar] = useState(false);
 
   const handleTabChange = (event, newValue) => {
-    setValue(newValue);
+    actions.setSelectedTab(newValue);
   };
 
   const handleClickInsidePagination = async (url) => {
@@ -96,7 +96,7 @@ const FilterTabs = () => {
       <Box sx={{ width: "100%", marginRight: "10px" }}>
         <AppBar position="static">
           <Tabs
-            value={value}
+            value={filterInput.selectedTab}
             onChange={handleTabChange}
             indicatorColor="secondary"
             textColor="inherit"
@@ -107,7 +107,7 @@ const FilterTabs = () => {
             <Tab label="Type" {...a11yProps(1)} />
           </Tabs>
         </AppBar>
-        <TabPanel value={value} index={0} dir={theme.direction}>
+        <TabPanel value={filterInput.selectedTab} index={0} dir={theme.direction}>
           <PaginatedItems
             data={pokemon.abilities}
             currentPage={filterInput.currentAbilityPage}
@@ -117,7 +117,7 @@ const FilterTabs = () => {
             selected={filterInput.selectedAbility}
           />
         </TabPanel>
-        <TabPanel value={value} index={1} dir={theme.direction}>
+        <TabPanel value={filterInput.selectedTab} index={1} dir={theme.direction}>
           <PaginatedItems
             data={pokemon.types}
             currentPage={filterInput.currentTypePage}
