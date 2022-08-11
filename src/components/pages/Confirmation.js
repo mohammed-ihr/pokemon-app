@@ -3,6 +3,7 @@ import "./styles/confirmation.styles.css";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { useLocation, useNavigate } from "react-router";
 import { useEffect } from "react";
+import PokemonImage from "../atoms/PokemonImage";
 
 const Confirmation = () => {
   const location = useLocation();
@@ -37,10 +38,9 @@ const Confirmation = () => {
             </Typography>
 
             <div className="image-container">
-              <img
+              <PokemonImage
                 height="200px"
-                src={location.state?.imgSrc ?? ""}
-                alt="new"
+                imgSrc={location.state?.imgSrc ?? null}
               />
             </div>
           </div>

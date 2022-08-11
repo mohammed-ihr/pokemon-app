@@ -14,6 +14,7 @@ import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import ConfirmationDialog from "../molecules/ConfirmationDialog";
 import { findPokemonImage } from "../../common/commonFunctions";
+import PokemonImage from "../atoms/PokemonImage";
 
 const PokemonDisplay = () => {
   const { pokemon, filterInput, actions } = useContext(PokemonContext);
@@ -84,10 +85,9 @@ const PokemonDisplay = () => {
               </IconButton>
             </div>
             <div className="picture">
-              <img
-                height="200px"
-                src={findPokemonImage(selectedPokemon)}
-                alt="new"
+              <PokemonImage
+                height="180px"
+                imgSrc={findPokemonImage(pokemon.selectedPokemon)}
               />
             </div>
 

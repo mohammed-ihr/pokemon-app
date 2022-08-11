@@ -11,6 +11,7 @@ import { useNavigate } from "react-router";
 import { findPokemonImage } from "../../common/commonFunctions";
 import PokemonContext from "../../state/PokemonContext";
 import UserContext from "../../state/UserContext";
+import PokemonImage from "../atoms/PokemonImage";
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -56,10 +57,9 @@ const ConfirmationDialog = (props) => {
               Selected Pokémon: {pokemon.selectedPokemon.name.toUpperCase()}
             </Typography>
 
-            <img
+            <PokemonImage
               height="150px"
-              src={findPokemonImage(pokemon.selectedPokemon)}
-              alt="new"
+              imgSrc={findPokemonImage(pokemon.selectedPokemon)}
             />
           </div>
         </DialogContent>

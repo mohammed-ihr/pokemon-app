@@ -25,5 +25,7 @@ export const findPokemonImage = (selectedPokemon) => {
     selectedPokemon.sprites.other["official-artwork"].front_default;
   if (dream_world) return dream_world;
 
-  return official;
+  if (official) return official;
+
+  return null;
 };

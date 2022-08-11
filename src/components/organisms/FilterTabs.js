@@ -14,6 +14,7 @@ import {
   sortArrayOfObjectsByProperty,
 } from "../../common/commonFunctions";
 import "./styles/filterTabs.styles.css";
+import Snackbar from "../molecules/SnackBar";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -53,7 +54,9 @@ const FilterTabs = () => {
   const theme = useTheme();
   const [value, setValue] = useState(0);
 
-  const handleChange = (event, newValue) => {
+  const [openSnackBar, setOpenSnackBar] = useState(false);
+
+  const handleTabChange = (event, newValue) => {
     setValue(newValue);
   };
 
@@ -71,7 +74,7 @@ const FilterTabs = () => {
       const pokemon = await pokemonRes.json();
       actions.setSelectedPokemon(pokemon);
       actions.setSelectedIndexInAutoComplete(0);
-    }
+    } else setOpenSnackBar(true);
   };
 
   const handleAbilityClick = (data) => {
@@ -85,11 +88,16 @@ const FilterTabs = () => {
 
   return (
     <div className="filter-tabs">
+      <Snackbar
+        message="Oops! There are no Pokémons of the selected criteria."
+        setOpen={setOpenSnackBar}
+        open={openSnackBar}
+      />
       <Box sx={{ width: "100%", marginRight: "10px" }}>
         <AppBar position="static">
           <Tabs
             value={value}
-            onChange={handleChange}
+            onChange={handleTabChange}
             indicatorColor="secondary"
             textColor="inherit"
             variant="fullWidth"
