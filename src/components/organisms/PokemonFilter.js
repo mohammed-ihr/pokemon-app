@@ -1,13 +1,16 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Button } from "@mui/material";
 import SearchBox from "../atoms/SearchBox";
 import FilterTabs from "./FilterTabs";
 import PokemonContext from "../../state/PokemonContext";
 import "./styles/pokemonFilter.styles.css";
 import { getSinglePokemon } from "../../network/pokemon.api";
+import Snackbar from "../molecules/SnackBar";
 
 const PokemonFilter = () => {
   const { filterInput, actions } = useContext(PokemonContext);
+
+  const [openSnackBar, setOpenSnackBar] = useState(false);
 
   const handleSearchButtonClick = async () => {
     try {
@@ -25,17 +28,24 @@ const PokemonFilter = () => {
       actions.setPokemons([pokemon]);
       actions.setSelectedIndexInAutoComplete(0);
     } catch (error) {
+      setOpenSnackBar(true);
       console.log(error);
     }
   };
   return (
     <div className="pokemon-filter">
+      <Snackbar
+        message={`Sorry! The pokemon named ${filterInput.searchKeyword} does not exist... yet!`}
+        setOpen={setOpenSnackBar}
+        open={openSnackBar}
+      />
       <div className="search-area">
         <div className="search-container">
           <SearchBox
             value={filterInput.searchKeyword}
             onChange={(e) => {
-              actions.setSearchKeyword(e.target.value);
+              if (e.target.value.length <= 50)
+                actions.setSearchKeyword(e.target.value);
             }}
             onEnterKeyPressed={handleSearchButtonClick}
           />

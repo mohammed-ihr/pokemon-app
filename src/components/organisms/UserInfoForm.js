@@ -1,6 +1,6 @@
 import { Button, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../state/UserContext";
 import "./styles/userInfoForm.styles.css";
