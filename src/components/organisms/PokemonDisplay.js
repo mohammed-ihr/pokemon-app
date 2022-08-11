@@ -6,16 +6,20 @@ import {
   IconButton,
   Button,
 } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { getDatafromURL } from "../../network/pokemon.api";
 import PokemonContext from "../../state/PokemonContext";
 import "./styles/pokemonDisplay.styles.css";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import ConfirmationDialog from "../molecules/ConfirmationDialog";
+import { findPokemonImage } from "../../common/commonFunctions";
 
 const PokemonDisplay = () => {
   const { pokemon, filterInput, actions } = useContext(PokemonContext);
   const { selectedPokemon } = pokemon;
+
+  const [open, setOpen] = useState(false);
 
   const handleDropDownChange = async (value) => {
     const res = await getDatafromURL(value.url);
@@ -25,23 +29,11 @@ const PokemonDisplay = () => {
     actions.setSelectedIndexInAutoComplete(value.id);
   };
 
-  const getImage = () => {
-    const dream_world = selectedPokemon.sprites.other.dream_world.front_default;
-
-    const official =
-      selectedPokemon.sprites.other["official-artwork"].front_default;
-    if (dream_world) return dream_world;
-
-    return official;
-  };
-
-  // console.log('dddddddd ', pokemon.pokemons[filterInput.selectedIndexInAutoComplete]);
-  // console.log('dddddddd== ',pokemon.pokemons[filterInput.selectedIndexInAutoComplete] === pokemon.pokemons[0]);
-
   return (
     <div className="pokemon-display">
+      <ConfirmationDialog open={open} handleClose={() => setOpen(false)} />
       <div className="pokemon-container">
-        {pokemon.pokemons.length > 0 && (
+        {pokemon.pokemons.length > 0 ? (
           <div>
             <div className="autocomplete-dropdown">
               <IconButton
@@ -92,7 +84,11 @@ const PokemonDisplay = () => {
               </IconButton>
             </div>
             <div className="picture">
-              <img height="200px" src={getImage()} alt="new" />
+              <img
+                height="200px"
+                src={findPokemonImage(selectedPokemon)}
+                alt="new"
+              />
             </div>
 
             <div className="basic-info">
@@ -154,15 +150,22 @@ const PokemonDisplay = () => {
               </div>
             </div>
 
-            <div className='catch-btn-container'>
+            <div className="catch-btn-container">
               <Button
                 className="catch-btn"
                 variant="outlined"
-                // onClick={() => onClick(item)}
+                onClick={() => setOpen(true)}
               >
                 Catch
               </Button>
             </div>
+          </div>
+        ) : (
+          <div className="helper-text">
+            <Typography variant="subtitle1" component="div">
+              Welcome to the arena! Start searching a Pokémon by directly typing the name in the
+              search box or browse Pokémons by filtering with Ability or Type.
+            </Typography>
           </div>
         )}
       </div>

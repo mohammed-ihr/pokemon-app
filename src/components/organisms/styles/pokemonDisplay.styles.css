@@ -14,6 +14,9 @@
   border: 4px solid #ff0000;
   border-radius: 20px;
   background-color: #f9e3c8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .pokemon-display .pokemon-container .heading {
@@ -49,6 +52,15 @@
   margin-top: 15px;
 }
 
+
+/* .pokemon-display .pokemon-container .helper-text {
+  display: flex;
+  height: 100%;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #CC0000;
+} */
 .pokemon-display .pokemon-container .catch-btn-container {
   display: flex;
   justify-content: center;

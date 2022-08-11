@@ -17,3 +17,13 @@ export const addOrderedIdTOArrayOfObjects = (items) => {
   const result = items.map((data, idx) => ({ id: idx, ...data }));
   return result;
 };
+
+export const findPokemonImage = (selectedPokemon) => {
+  const dream_world = selectedPokemon.sprites.other.dream_world.front_default;
+
+  const official =
+    selectedPokemon.sprites.other["official-artwork"].front_default;
+  if (dream_world) return dream_world;
+
+  return official;
+};
