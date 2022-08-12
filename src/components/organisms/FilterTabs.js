@@ -79,10 +79,16 @@ const FilterTabs = () => {
   const handleAbilityClick = (data) => {
     actions.setSelectedAbility(data.name);
     handleClickInsidePagination(data.url);
+    //clear type and search keyword filter
+    actions.setSelectedType("");
+    actions.setSearchKeyword("");
   };
   const handleTypeClick = (data) => {
     actions.setSelectedType(data.name);
     handleClickInsidePagination(data.url);
+    //clear ability and search keyword filter
+    actions.setSelectedAbility("");
+    actions.setSearchKeyword("");
   };
 
   return (
@@ -93,7 +99,7 @@ const FilterTabs = () => {
         open={openSnackBar}
       />
       <Box sx={{ width: "100%", marginRight: "10px" }}>
-        <AppBar position="static">
+        <AppBar position="static" color="secondary">
           <Tabs
             value={filterInput.selectedTab}
             onChange={handleTabChange}
@@ -106,7 +112,11 @@ const FilterTabs = () => {
             <Tab label="Type" {...a11yProps(1)} />
           </Tabs>
         </AppBar>
-        <TabPanel value={filterInput.selectedTab} index={0} dir={theme.direction}>
+        <TabPanel
+          value={filterInput.selectedTab}
+          index={0}
+          dir={theme.direction}
+        >
           <PaginatedItems
             data={pokemon.abilities}
             currentPage={filterInput.currentAbilityPage}
@@ -116,7 +126,11 @@ const FilterTabs = () => {
             selected={filterInput.selectedAbility}
           />
         </TabPanel>
-        <TabPanel value={filterInput.selectedTab} index={1} dir={theme.direction}>
+        <TabPanel
+          value={filterInput.selectedTab}
+          index={1}
+          dir={theme.direction}
+        >
           <PaginatedItems
             data={pokemon.types}
             currentPage={filterInput.currentTypePage}

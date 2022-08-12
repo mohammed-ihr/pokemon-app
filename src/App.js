@@ -10,6 +10,9 @@ import { UserProvider } from "./state/UserContext";
 const theme = createTheme({
   palette: {
     primary: {
+      main: "#607d8b",
+    },
+    secondary: {
       main: "#CC0000",
     },
   },

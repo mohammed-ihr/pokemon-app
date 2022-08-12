@@ -98,21 +98,21 @@ export function PokemonProvider({ children }) {
     // ==============================================================================
   };
 
-  useEffect(() => {
-    if (filterInput.selectedAbility !== "") {
-      actions.setSelectedType("");
-      actions.setSearchKeyword("");
-    }
-    // eslint-disable-next-line
-  }, [filterInput.selectedAbility]);
+  // useEffect(() => {
+  //   if (filterInput.selectedAbility !== "") {
+  //     actions.setSelectedType("");
+  //     actions.setSearchKeyword("");
+  //   }
+  //   // eslint-disable-next-line
+  // }, [filterInput.selectedAbility]);
 
-  useEffect(() => {
-    if (filterInput.selectedType !== "") {
-      actions.setSelectedAbility("");
-      actions.setSearchKeyword("");
-    }
-    // eslint-disable-next-line
-  }, [filterInput.selectedType]);
+  // useEffect(() => {
+  //   if (filterInput.selectedType !== "") {
+  //     actions.setSelectedAbility("");
+  //     actions.setSearchKeyword("");
+  //   }
+  //   // eslint-disable-next-line
+  // }, [filterInput.selectedType]);
 
   useEffect(() => {
     setPokemonToLocalStorage(pokemon);

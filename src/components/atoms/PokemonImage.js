@@ -2,7 +2,6 @@ import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import { Typography } from "@mui/material";
 import "./styles/pokemonImage.styles.css";
 
-
 const PokemonImage = (props) => {
   const { imgSrc, height } = props;
 

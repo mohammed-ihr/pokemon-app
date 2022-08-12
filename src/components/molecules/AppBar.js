@@ -8,7 +8,7 @@ const AppBar = () => {
   const { user } = useContext(UserContext);
 
   return (
-    <MuiAppBar position="static">
+    <MuiAppBar position="static" color="secondary">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           POKEMON
