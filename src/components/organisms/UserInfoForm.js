@@ -18,11 +18,6 @@ const UserInfoForm = () => {
 
   return (
     <div className="user-info-form">
-      <div className="heading">
-        <Typography variant="h4" component="div">
-          Let's get started!
-        </Typography>
-      </div>
       <div className="first-row">
         <TextField
           required
