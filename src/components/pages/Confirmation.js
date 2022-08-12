@@ -1,9 +1,10 @@
-import { Typography } from "@mui/material";
+import { IconButton, Typography } from "@mui/material";
 import "./styles/confirmation.styles.css";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { useLocation, useNavigate } from "react-router";
 import { useEffect } from "react";
 import PokemonImage from "../atoms/PokemonImage";
+import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 
 const Confirmation = () => {
   const location = useLocation();
@@ -21,11 +22,14 @@ const Confirmation = () => {
     <>
       {location.state && (
         <div className="confirmation">
+          <div className="pokemon-back-icon-container">
+            <IconButton onClick={() => navigate("/pokemon")}>
+              <CatchingPokemonIcon className="pokemon-back-icon" />
+            </IconButton>
+          </div>
           <div className="confirmation-container">
-            <div className="icon">
-              <CheckCircleOutlineIcon
-                style={{ fontSize: "150px", color: "green" }}
-              />
+            <div className="success-icon-container">
+              <CheckCircleOutlineIcon className="success-icon" />
             </div>
 
             <Typography variant="h4">

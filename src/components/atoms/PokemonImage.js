@@ -1,6 +1,7 @@
-import HideImageIcon from "@mui/icons-material/HideImage";
+import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import { Typography } from "@mui/material";
 import "./styles/pokemonImage.styles.css";
+
 
 const PokemonImage = (props) => {
   const { imgSrc, height } = props;
@@ -11,10 +12,8 @@ const PokemonImage = (props) => {
         <img height={height} src={imgSrc} alt="Not found" />
       ) : (
         <div className="no-image-container">
-          <div className='hide-image'>
-            <HideImageIcon 
-                style={{ fontSize: "50px"}}
-	    />
+          <div className="hide-image">
+            <CatchingPokemonIcon style={{ fontSize: "65px" }} />
           </div>
           <Typography variant="subtitle2">
             Image of this Pokémon is not available{" "}

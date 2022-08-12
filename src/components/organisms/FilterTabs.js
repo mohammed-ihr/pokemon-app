@@ -52,7 +52,6 @@ function a11yProps(index) {
 const FilterTabs = () => {
   const { pokemon, filterInput, actions } = useContext(PokemonContext);
   const theme = useTheme();
-  const [value, setValue] = useState(0);
 
   const [openSnackBar, setOpenSnackBar] = useState(false);
 
