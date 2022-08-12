@@ -1,3 +1,8 @@
 .user-info .typing-effect {
   display: flex;
 }
+
+.user-info h1 {
+  font-size: 40px;
+  font-family: monospace;
+}

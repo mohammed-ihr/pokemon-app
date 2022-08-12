@@ -9,8 +9,9 @@
 }
 
 .paginated-items .display-btn {
-  width: 120px;
+  width: 130px;
   height: 80px;
+  /* font-size: 12px; */
 }
 
 .paginated-items .display-btn-selected {
